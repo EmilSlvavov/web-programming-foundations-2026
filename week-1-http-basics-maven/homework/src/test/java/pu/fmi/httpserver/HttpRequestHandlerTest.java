@@ -33,7 +33,8 @@ class HttpRequestHandlerTest {
                     handler
                             .handleRequest(HttpMethod.GET, "/notifications/" + created.getId(), null)
                             .getResult();
-
+    //In test shouldReturnNotFoundWhenNotificationAlreadyDeleted you expect find to not return notification
+    // because it has not been deleted, while here you expect to get the notification even though it has been deleted
     assertTrue(result.isDeleted());
   }
 

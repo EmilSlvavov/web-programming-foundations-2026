@@ -100,8 +100,12 @@ public class HttpRequestHandler {
     // ВАЖНО:
     // * Всички предоставени Unit тестове трябва да минават успешно
     // * Не променяйте тестовете
-
-    return null;
+    Notification notification = find(path);
+    if (notification == null || notification.isDeleted()){
+      return new HttpResponse<>(HttpStatus.NOT_FOUND, "Notification not found");
+    }
+    notification.setDeleted(true);
+    return new HttpResponse<>(HttpStatus.NO_CONTENT, "Notification deleted");
   }
 
   private Notification find(String path) {
