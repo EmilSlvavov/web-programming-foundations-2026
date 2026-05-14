@@ -29,6 +29,17 @@ public class DeliveryEstimator {
     // * Не променяйте тестовете
     // * Не променяйте сигнатурата на метода
 
-    return null;
+    if (delivery.getWarehouse().getCity().equals(delivery.getCustomer().getCity())){
+      delivery.setEstimatedArrivalAt(delivery.getCreatedAt().plusDays(1));
+    }
+    else {
+      delivery.setEstimatedArrivalAt(delivery.getCreatedAt().plusDays(3));
+    }
+
+    if (delivery.getCourier() == null || !delivery.getCourier().isAvailable()) {
+      delivery.setEstimatedArrivalAt(delivery.getEstimatedArrivalAt().plusDays(2));
+    }
+
+    return delivery.getEstimatedArrivalAt();
   }
 }
